@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+
+.shopNowButton{
+    width: 191px;
+    height: 56px;
+    background: none;
+    border-radius: 7px;
+    border: 2px solid transparent;
+    @include flex-center-row;
+    font-size: 16px;
+    font-weight: 500;
+    transition: $transition-style;
+
+    &:hover{
+        transform: scale(0.95);
+    }
+}

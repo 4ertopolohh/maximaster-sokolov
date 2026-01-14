@@ -1,0 +1,32 @@
+@use '../../../../styles/variables' as *;
+
+.welcomeSectionDescription{
+    @include flex-center-column;
+    align-items: start;
+    gap: 25px;
+
+    .welcomeSectionEyeBrow{
+        font-size: 25px;
+        font-weight: 600;
+        opacity: 0.4;
+        color: $color-white;
+    }
+
+    .welcomeSectionTitle{
+        font-size: 96px;
+        font-weight: 100 !important;
+        color: $color-white;
+        line-height: 72px;
+
+        span{
+            font-weight: 600;
+        }
+    }
+
+    .welcomeSectionSubtitle{
+        font-size: 18px;
+        font-weight: 500;
+        opacity: 0.4;
+        color: $color-white;
+    }
+}

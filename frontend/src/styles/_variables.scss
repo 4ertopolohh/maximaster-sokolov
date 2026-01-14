@@ -4,8 +4,10 @@ $transition-style: all 500ms ease;
 
 $max-width-container: 1120px;
 
+$color-white: #fff;
 $color-gray-background: #F5F5F5;
 $color-gray-text: #656565;
+$color-gray-very-dark: #211C24;
 
 @mixin flex($justify, $align, $direction) {
     display: flex;

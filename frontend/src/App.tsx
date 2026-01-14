@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import './styles/base.scss'
 import './styles/_variables.scss'
+import './styles/_fonts.scss'
 import { ROUTES, type AppRoute } from './shared/routes'
 import Header from './components/Header/Header'
 

@@ -1,0 +1,16 @@
+@use '../../../../styles/variables' as *;
+
+.welcomeSection{
+    background-color: $color-gray-very-dark;
+    height: 632px;
+
+    .container{
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .welcomeSectionBanner{
+            width: 406px;
+        }
+    }
+}

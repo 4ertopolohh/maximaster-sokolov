@@ -1,10 +1,21 @@
 import '../ShopNowButton/ShopNowButton.scss'
 import { Link } from 'react-router-dom'
 
-const ShopNowButton = () => {
-    return(
-        <Link to={'/catalog'}></Link>
-    )
+export type ShopNowButtonProps = {
+  color: string
 }
 
-export default ShopNowButton;
+const ShopNowButton = ({ color }: ShopNowButtonProps) => {
+  const shopNowButtonStyles: React.CSSProperties = {
+    color,
+    border: `2px solid ${color}`,
+  }
+
+  return (
+    <Link to={'/catalog'} className="shopNowButton" style={shopNowButtonStyles}>
+      Shop Now
+    </Link>
+  )
+}
+
+export default ShopNowButton
