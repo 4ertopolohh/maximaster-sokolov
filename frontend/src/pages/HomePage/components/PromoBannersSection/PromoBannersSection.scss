@@ -1,0 +1,12 @@
+@use '../../../../styles/variables' as *;
+
+.promoBannersSection{
+    @include flex-center-row;
+    width: 100vw;
+}
+
+.promoMiniBanners{
+    width: 50%;
+    @include flex-center-row;
+    flex-wrap: wrap;
+}
