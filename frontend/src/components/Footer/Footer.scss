@@ -1,0 +1,21 @@
+@use '../../styles/variables' as *;
+
+.footer{
+    background-color: #000;
+    // width: 100%;
+    color: #fff;
+    height: 504px;
+    @include flex-center-column;
+
+    .container{
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+        .footerMain{
+            @include flex-between-row;
+            width: 100%;
+            align-items: start;
+        }
+    }  
+}

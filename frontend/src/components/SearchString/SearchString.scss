@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+
+.searchStringWrapper{
+    position: relative;
+
+    .searchString{
+        width: 372px;
+        height: 56px;
+        border: none;
+        border-radius: 10px;
+        background-color: $color-gray-background;
+        outline: none;
+        box-shadow: none;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+        padding-left: 17px;
+
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:focus-visible{
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    .placeholder{
+        position: absolute;
+        @include flex-center-row;
+        gap: 5px;
+        top: 30%;
+        left: 15px;
+        pointer-events: none;
+
+        img{
+            width: 24px;
+            height: 24px;
+        }
+
+        span{
+            color: $color-gray-text;
+            font-family: $font-default;
+            font-size: 14px;
+            font-weight: 500;
+            padding-top: 3px;
+        }
+    }
+}

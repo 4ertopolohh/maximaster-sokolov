@@ -1,0 +1,11 @@
+@use '../../styles/variables' as *;
+
+.header{
+    height: 88px;
+    @include flex-center-column;
+
+    .container{
+        align-items: center;
+        justify-content: space-between;
+    }
+}

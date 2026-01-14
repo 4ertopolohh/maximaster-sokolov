@@ -1,0 +1,6 @@
+@use '../../styles/variables' as *;
+
+.headerNav{
+    @include flex-between-row;
+    width: 50%;
+}

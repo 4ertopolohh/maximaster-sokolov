@@ -1,0 +1,21 @@
+@use '../../styles/variables' as *;
+
+.inDevSection{
+    @include flex-center-column;
+    height: 70vh;
+    
+    .container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        h1{
+            font-size: 50px;
+        }
+
+        h3{
+            font-size: 30px;
+        }
+    }
+}

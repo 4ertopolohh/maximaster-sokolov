@@ -1,0 +1,23 @@
+@use '../../styles/variables' as *;
+
+.headerNavLinks{
+    @include flex-between-row;
+    width: 65%;
+
+    .headerNavLinksItem{
+        font-size: 16px !important;
+        font-weight: 500 !important;
+    }
+
+    .headerNavLinksLink{
+        opacity: 0.4;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    .headerNavLinksLinkActive{
+        opacity: 1;
+    }
+}

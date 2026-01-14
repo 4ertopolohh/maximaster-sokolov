@@ -1,0 +1,35 @@
+$font-default: "Inter", sans-serif;
+
+$transition-style: all 500ms ease;
+
+$max-width-container: 1120px;
+
+$color-gray-background: #F5F5F5;
+$color-gray-text: #656565;
+
+@mixin flex($justify, $align, $direction) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;
+}
+
+@mixin flex-center-row {
+    @include flex(center, center, row);
+}
+
+@mixin flex-center-column {
+    @include flex(center, center, column);
+}
+
+@mixin flex-between-row {
+    @include flex(space-between, center, row);
+}
+
+@mixin flex-between-column {
+    @include flex(space-between, center, column);
+}
+
+@mixin flex-in-dev {
+    @include flex(center, center, row);
+}

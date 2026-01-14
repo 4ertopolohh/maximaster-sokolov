@@ -1,0 +1,30 @@
+@use '../../styles/variables' as *;
+
+.footerLinks{
+    .footerLinksTitle{
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .footerLinksList{
+        @include flex-center-column;
+        align-items: start;
+        gap: 20px;
+        margin-top: 15px;
+
+        .footerLinksListItem{
+
+            a{
+                color: #fff !important;
+                font-size: 14px;
+                font-weight: 400;
+                opacity: 0.8;
+                transition: $transition-style;
+
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

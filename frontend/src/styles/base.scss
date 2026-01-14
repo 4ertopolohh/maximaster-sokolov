@@ -1,0 +1,100 @@
+@use '../styles/variables' as *;
+
+section{
+  width: 100%;
+  @include flex-center-column;
+}
+
+section + section {
+  content-visibility: auto;
+}
+
+section + section[data-cv="off"] {
+  content-visibility: hidden;
+  contain-intrinsic-size: 1px 900px;
+  contain-intrinsic-block-size: 900px;
+}
+
+section + section[data-cv="on"] {
+  content-visibility: auto;
+}
+
+p {
+  margin: 0;
+  font-family: $font-default;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li{
+    padding: 0 0;
+    margin: 0 0;
+  }
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    // background-color: #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 !important;
+  padding: 0 0 !important;
+  font-family: $font-default;
+  font-weight: 700;
+}
+
+img {
+  object-fit: contain;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: $transition-style;
+  padding: 0 0;
+  margin: 0 0;
+  font-family: $font-default;
+}
+
+button,
+a,
+[role="button"],
+input,
+textarea {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+span {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: $transition-style;
+  color: #000;
+  font-family: $font-default;
+}
+
+.App{
+    font-family: $font-default;
+    color: #000;
+    margin: 0;
+    font-weight: 300;
+    width: 100%;
+}
+
+.container{
+    max-width: $max-width-container;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    display: flex;
+    margin: 0 auto;
+}

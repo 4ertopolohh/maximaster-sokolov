@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.headerNavActions{
+    @include flex-between-row;
+    max-width: 144px;
+    width: 100%;
+
+    .headerNavLinksItem{
+        width: 32px;
+        height: 32px;
+        transition: $transition-style;
+
+        img{
+            width: 32px;
+            height: 32px;
+        }
+
+        &:hover{
+            opacity: 0.6;
+        }
+    }
+}

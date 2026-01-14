@@ -1,0 +1,12 @@
+@use '../../styles/variables' as *;
+
+.footerDescription{
+    max-width: 360px;
+
+    p{
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.8;
+        margin-top: 25px;
+    }
+}
