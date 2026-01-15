@@ -1,0 +1,66 @@
+@use '../../../../styles/variables' as *;
+
+.categoriesSection{
+    height: 352px;
+    background-color: $color-gray-background-FA;
+
+    .container{
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
+
+        .categoriesSectionHeader{
+            width: 100%;
+            @include flex-between-row;
+
+            .categoriesSectionNav{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .categoriesNavBtn{
+                padding: 4px;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                transition: $transition-style;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img{
+                    width: 32px;
+                    height: 32px;
+                    display: block;
+                }
+
+                &:hover{
+                    transform: scale(0.97);
+                }
+
+                &:active{
+                    transform: scale(0.95);
+                }
+            }
+        }
+
+        .categories{
+            @include flex-between-row;
+            width: 100%;
+        }
+
+        .categoriesSwiper{
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .categoriesSlide{
+            height: auto;
+            display: flex;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@use '../../../../styles/variables' as *;
+
+.categorieCard{
+    width: 160px;
+    height: 128px;
+    background-color: $color-gray-background;
+    @include flex-center-column;
+    border-radius: 10px;
+    transition: $transition-style;
+
+    &:hover{
+        transform: scale(0.95);
+    }
+
+    img{
+        width: 48px;
+    }
+    h3{
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
