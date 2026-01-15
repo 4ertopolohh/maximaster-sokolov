@@ -1,0 +1,44 @@
+@use '../../../../styles/variables' as *;
+
+.miniCatalogSectionHeader{
+    width: 100%;
+
+    .miniCatalogHeaderNav{
+        width: 100%;
+        @include flex-center-row;
+        justify-content: start;
+        gap: 25px;
+
+        // .miniCatalogNavItem{
+            
+        //     opacity: 0.4;
+        //     transition: $transition-style;
+
+        //     &:hover{
+        //         opacity: 0.8;
+        //     }
+        // }
+
+        .miniCatalogNavButton{
+            font-size: 18px;
+            font-weight: 500;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+
+            opacity: 0.4;
+            border-bottom: 3px solid transparent;
+            transition: opacity $transition-style, border-bottom-color $transition-style;
+
+            &:hover{
+                opacity: 0.8;
+            }
+
+            &.isActive{
+                opacity: 1;
+                border-bottom-color: #000;
+            }
+        }
+    }
+}
