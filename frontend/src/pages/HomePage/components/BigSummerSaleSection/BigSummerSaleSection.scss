@@ -1,0 +1,33 @@
+@use '../../../../styles/variables' as *;
+
+.bigSummerSaleSection{
+    min-height: 448px;
+    background: url(../../../../assets/images/pictures/bigSummerSaleBackground.png);
+    background-position: center;
+    background-size: cover;
+
+    .container{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .bigSummerSaleTitle{
+            font-size: 72px;
+            font-weight: 100;
+            color: $color-white;
+
+            span{
+                font-weight: 500;
+            }
+        }
+
+        .bigSummerSaleSubtitle{
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 50px;
+            color: $color-white;
+            opacity: 0.4;
+        }
+    }
+}
