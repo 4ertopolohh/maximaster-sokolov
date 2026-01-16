@@ -3,6 +3,13 @@
 .header{
     height: 88px;
     @include flex-center-column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $color-white;
+    border-bottom: 2px solid $color-gray-background;
+    z-index: 1000;
 
     .container{
         align-items: center;

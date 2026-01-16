@@ -1,0 +1,42 @@
+@use '../../styles/variables' as *;
+
+.story{
+    height: 104px;
+    @include flex-center-column;
+
+    .container{
+        align-items: center;
+        justify-content: start;
+        gap: 15px;
+
+        .storyItem{
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.4;
+            position: relative;
+        }
+
+        .storyItem.storyItem--active{
+            opacity: 1;
+        }
+
+        .storyItem + .storyItem{
+            padding-left: 35px;
+
+            &::before{
+                content: '';
+                display: block;
+                background: url(../../assets/images/icons/storyArrow.png);
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

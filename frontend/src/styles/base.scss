@@ -1,5 +1,9 @@
 @use '../styles/variables' as *;
 
+main{
+  padding-top: 88px;
+}
+
 section{
   width: 100%;
   @include flex-center-column;

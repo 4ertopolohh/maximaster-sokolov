@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Suspense, lazy, useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import './styles/base.scss'
 import './styles/_variables.scss'
@@ -12,6 +12,7 @@ import basketIcon from './assets/images/icons/basketIcon.png'
 import userIcon from './assets/images/icons/userIcon.png'
 import Footer from './components/Footer/Footer'
 import Loader from './components/Loader/Loader'
+import { NavigationHistoryProvider } from './shared/navigationHistory'
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const InfoPage = lazy(() => import('./pages/InfoPage/InfoPage'))
@@ -57,9 +58,20 @@ const headerNavActions: HeaderNavActionItem[] = [
   { icon: userIcon, to: ROUTES.profile },
 ]
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [pathname])
+
+  return null
+}
+
 const App = () => {
   return (
-    <>
+    <NavigationHistoryProvider>
+      <ScrollToTop />
       <Header links={headerNavLinks} actions={headerNavActions} />
       <Suspense fallback={<Loader />}>
         <Routes>
@@ -80,7 +92,7 @@ const App = () => {
         </Routes>
       </Suspense>
       <Footer />
-    </>
+    </NavigationHistoryProvider>
   )
 }
 
