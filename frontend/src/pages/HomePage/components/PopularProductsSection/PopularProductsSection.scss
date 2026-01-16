@@ -1,0 +1,6 @@
+@use '../../../../styles/variables' as *;
+
+.popularProductsSection{
+    @include flex-center-row;
+    padding-top: 75px;
+}

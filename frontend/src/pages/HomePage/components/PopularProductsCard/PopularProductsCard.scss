@@ -1,0 +1,29 @@
+@use '../../../../styles/variables' as *;
+
+.popularProductsCard {
+    height: 640px;
+    @include flex-center-column;
+    justify-content: start;
+
+    .popularProductCardImage {
+        height: 360px;
+    }
+
+    .productCardDescription {
+        width: 296px;
+        height: 200px;
+        @include flex-between-column;
+        align-items: start;
+
+        .popularProductCardTitle {
+            font-size: 33px;
+            font-weight: 300;
+        }
+
+        .popularProductCardSubtitle {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.4;
+        }
+    }
+}
