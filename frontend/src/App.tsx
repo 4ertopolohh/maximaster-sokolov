@@ -11,6 +11,7 @@ import favoriteIcon from './assets/images/icons/favoriteIcon.png'
 import basketIcon from './assets/images/icons/basketIcon.png'
 import userIcon from './assets/images/icons/userIcon.png'
 import Footer from './components/Footer/Footer'
+import Loader from './components/Loader/Loader'
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const InfoPage = lazy(() => import('./pages/InfoPage/InfoPage'))
@@ -56,13 +57,11 @@ const headerNavActions: HeaderNavActionItem[] = [
   { icon: userIcon, to: ROUTES.profile },
 ]
 
-
-
 const App = () => {
   return (
     <>
       <Header links={headerNavLinks} actions={headerNavActions} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={ROUTES.home} element={<HomePage />} />
           <Route path={ROUTES.info} element={<InfoPage />} />

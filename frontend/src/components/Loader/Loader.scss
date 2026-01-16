@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.loaderOverlay {
+  position: fixed;
+  inset: 0;
+  @include flex-center-row;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+}
+
+.loaderRing {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.95);
+  animation: loaderSpin 700ms linear infinite;
+}
+
+@keyframes loaderSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
