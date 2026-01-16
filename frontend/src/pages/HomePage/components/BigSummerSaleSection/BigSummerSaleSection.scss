@@ -5,6 +5,10 @@
     background: url(../../../../assets/images/pictures/bigSummerSaleBackground.png);
     background-position: center;
     background-size: cover;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: transform 700ms ease, opacity 700ms ease;
+    will-change: transform, opacity;
 
     .container{
         width: 100%;
@@ -30,4 +34,9 @@
             opacity: 0.4;
         }
     }
+}
+
+.bigSummerSaleSection.bigSummerSaleSection--visible{
+    opacity: 1;
+    transform: translateY(0);
 }

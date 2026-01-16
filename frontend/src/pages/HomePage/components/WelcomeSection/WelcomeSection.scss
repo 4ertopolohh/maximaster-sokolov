@@ -1,16 +1,26 @@
 @use '../../../../styles/variables' as *;
 
-.welcomeSection{
+.welcomeSection {
     background-color: $color-gray-very-dark;
     height: 632px;
+    overflow-y: hidden;
 
-    .container{
+    .container {
         align-items: center;
         justify-content: space-between;
         width: 100%;
 
-        .welcomeSectionBanner{
+        .welcomeSectionBanner {
             width: 406px;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: transform 700ms ease, opacity 700ms ease;
+            will-change: transform, opacity;
+        }
+
+        .welcomeSectionBanner.welcomeSectionBanner--visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }

@@ -6,6 +6,10 @@
     @include flex-center-row;
     justify-content: end;
     background-color: $color-gray-background;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: transform 700ms ease, opacity 700ms ease;
+    will-change: transform, opacity;
 
     .promoBannerDescription{
         width: 360px;
@@ -34,4 +38,9 @@
         width: 292px;
         height: 502px;
     }
+}
+
+.promoBanner.promoBanner--visible{
+    opacity: 1;
+    transform: translateY(0);
 }

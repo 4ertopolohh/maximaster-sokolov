@@ -1,5 +1,6 @@
 import ShopNowButton from '../../../../components/ShopNowButton/ShopNowButton'
 import '../PromoBanner/PromoBanner.scss'
+import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 import macBookPromo from '../../../../assets/images/pictures/macBookPromo.png'
@@ -51,6 +52,31 @@ const PromoBanner = ({
   descriptionGap,
   titleLineHeight,
 }: PromoBannerProps) => {
+  const rootRef = useRef<HTMLDivElement | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const el = rootRef.current
+    if (!el) return
+
+    if (isVisible) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (entry && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    observer.observe(el)
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
   const rootStyles: CSSProperties = {
     width,
     height,
@@ -108,7 +134,11 @@ const PromoBanner = ({
   )
 
   return (
-    <div className="promoBanner" style={rootStyles}>
+    <div
+      ref={rootRef}
+      className={`promoBanner${isVisible ? ' promoBanner--visible' : ''}`}
+      style={rootStyles}
+    >
       {align === 'left' ? imageEl : null}
       {descriptionEl}
       {align === 'right' ? imageEl : null}
