@@ -1,6 +1,7 @@
 import InDevSection from '../../components/InDevSection/InDevSection';
 import '../HomePage/HomePage.scss'
 import CategoriesSection from './components/CategoriesSection/CategoriesSection';
+import DiscountSection from './components/DiscountSection/DiscountSection';
 import MiniCatalogSection from './components/MiniCatalogSection/MiniCatalogSection';
 import PopularProductsSection from './components/PopularProductsSection/PopularProductsSection';
 import PromoBannersSection from './components/PromoBannersSection/PromoBannersSection';
@@ -14,6 +15,7 @@ const HomePage = () => {
       <CategoriesSection />
       <MiniCatalogSection />
       <PopularProductsSection />
+      <DiscountSection />
       <InDevSection sectionName='Home'/>
     </main>
   )
