@@ -1,0 +1,25 @@
+@use '../../../../styles/variables' as *;
+
+.catalogPageSlide {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    @include flex-center-row;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: $color-gray-background;
+    transition: background-color $transition-style, color $transition-style, transform $transition-style;
+
+    &:hover {
+        transform: scale(0.95);
+    }
+
+    &.isActive {
+        background-color: $color-black;
+        color: $color-white;
+    }
+
+    &.isEllipsis {
+        background-color: transparent;
+    }
+}

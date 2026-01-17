@@ -1,0 +1,52 @@
+@use '../../../../styles/variables' as *;
+
+.filterSearchStringWrapper{
+    position: relative;
+    width: 100%;
+
+    .filterSearchString{
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        background-color: $color-gray-background-light;
+        outline: none;
+        box-shadow: none;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+        padding-left: 17px;
+
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:focus-visible{
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    .filterPlaceholder{
+        position: absolute;
+        @include flex-center-row;
+        gap: 5px;
+        top: 20%;
+        left: 15px;
+        pointer-events: none;
+
+        img{
+            width: 24px;
+            height: 24px;
+        }
+
+        span{
+            color: $color-gray-text;
+            font-family: $font-default;
+            font-size: 14px;
+            font-weight: 500;
+            padding-top: 3px;
+        }
+    }
+}

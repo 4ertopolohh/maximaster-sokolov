@@ -1,0 +1,10 @@
+@use '../../../../styles/variables' as *;
+
+.catalogSection{
+    .container{
+        justify-content: space-between;
+        width: 100%;
+        align-items: start;
+        margin-bottom: 50px;
+    }
+}

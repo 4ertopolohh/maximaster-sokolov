@@ -1,0 +1,59 @@
+@use '../../../../styles/variables' as *;
+
+.catalogPagesSwiper {
+    height: 32px;
+    @include flex-center-row;
+    gap: 12px;
+}
+
+.catalogPagesNavBtn {
+    width: 24px;
+    height: 24px;
+    @include flex-center-row;
+}
+
+.catalogPagesSwiperInner {
+    height: 32px;
+    width: fit-content;
+    max-width: calc(5 * 32px + 4 * 8px);
+    overflow: hidden;
+    @include flex-center-row;
+}
+
+.catalogPagesSwiperTrack {
+    height: 32px;
+    width: 100%;
+}
+
+.catalogPagesSwiperTrack .swiper-slide {
+    width: 32px;
+    flex: 0 0 32px;
+}
+
+.catalogPagesSlide {
+    width: 32px;
+    height: 32px;
+    @include flex-center-row;
+}
+
+.catalogPagesCondensed {
+    height: 32px;
+    width: fit-content;
+    @include flex-center-row;
+    gap: 8px;
+}
+
+.catalogPagesEllipsis {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    @include flex-center-row;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: transparent;
+    transition: background-color $transition-style, color $transition-style, transform $transition-style;
+
+    &:hover {
+        transform: scale(0.95);
+    }
+}

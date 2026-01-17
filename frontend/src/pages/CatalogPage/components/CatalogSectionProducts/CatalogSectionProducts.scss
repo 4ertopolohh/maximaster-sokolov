@@ -1,0 +1,16 @@
+@use '../../../../styles/variables' as *;
+
+.catalogSectionProductsWrapper{
+    @include flex-center-column;
+    justify-content: start;
+    width: 100%;
+    max-width: 831px;
+    gap: 30px;
+}
+
+.catalogSectionProducts{
+    @include flex-center-row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 13px;
+}

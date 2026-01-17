@@ -1,0 +1,21 @@
+@use '../../../../styles/variables' as *;
+
+.catalogProductsHeader{
+    @include flex-between-row;
+    width: 100%;
+    height: 40px;
+
+    .catalogProductsHeaderCount{
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.6;
+        @include flex-center-row;
+
+        span{
+            font-size: 20px;
+            font-weight: 500;
+            opacity: 1 !important;
+            margin-left: 5px;
+        }
+    }
+}
