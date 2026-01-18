@@ -1,0 +1,44 @@
+@use '../../../../styles/variables' as *;
+
+.productPreviewDescriptionText{
+    width: 100%;
+    position: relative;
+
+    &__measure{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        visibility: hidden;
+        pointer-events: none;
+        overflow: visible;
+        height: auto;
+        z-index: -1;
+    }
+
+    &__content{
+        overflow: hidden;
+        transition: height 260ms ease;
+    }
+
+    p{
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        color: $color-gray-text;
+
+        button{
+            opacity: 1;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .productPreviewDescriptionText{
+        &__content{
+            transition: none;
+            height: fit-content !important;
+        }
+    }
+}

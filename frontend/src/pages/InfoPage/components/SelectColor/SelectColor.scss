@@ -1,0 +1,23 @@
+@use '../../../../styles/variables' as *;
+
+.selectColor{
+    @include flex-center-row;
+    justify-content: start;
+    gap: 20px;
+    width: 100%;
+
+    .selectColorTitle{
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .selectColorListColors{
+        @include flex-center-row;
+        gap: 7px;
+
+        .selectColorListItem{
+            width: fit-content;
+            height: fit-content;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+@use '../../../../styles/variables' as *;
+
+.productPreviewMiniImage{
+    height: 93px;
+    width: 93px;
+    opacity: 0.4;
+    @include flex-center-column;
+    transition: $transition-style;
+
+    &:hover{
+        opacity: 1;
+    }
+
+    img{
+        height: 93px;
+    }
+}
+
+.productPreviewMiniImageActive{
+    opacity: 1;
+}

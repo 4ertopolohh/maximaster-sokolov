@@ -1,0 +1,16 @@
+@use '../../../../styles/variables' as *;
+
+.addToWishlistButton{
+    width: 260px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid $color-black;
+    @include flex-center-row;
+    font-size: 16px;
+    font-weight: 500;
+    transition: $transition-style;
+
+    &:hover{
+        transform: scale(0.95);
+    }
+}

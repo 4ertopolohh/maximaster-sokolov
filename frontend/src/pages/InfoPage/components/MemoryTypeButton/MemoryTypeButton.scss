@@ -1,0 +1,31 @@
+@use '../../../../styles/variables' as *;
+
+.memoryTypeButton{
+    width: 122px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid $color-black;
+    color: $color-black;
+    opacity: 0.4;
+    @include flex-center-row;
+    font-size: 14px;
+    font-weight: 500;
+    transition: $transition-style;
+
+    &:hover{
+        opacity: 0.8;
+    }
+}
+
+.memoryTypeButton.memoryTypeButton--active{
+    opacity: 1;
+}
+
+.memoryTypeButton.memoryTypeButton--disabled{
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.memoryTypeButton:not(.memoryTypeButton--disabled):hover{
+    opacity: 0.8;
+}

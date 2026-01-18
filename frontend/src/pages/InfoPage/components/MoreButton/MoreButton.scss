@@ -1,0 +1,12 @@
+@use '../../../../styles/variables' as *;
+
+.moreButton{
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: 400;
+    transition: $transition-style;
+
+    &:hover{
+        opacity: 0.4;
+    }
+}

@@ -1,0 +1,35 @@
+@use '../../../../styles/variables' as *;
+
+.termsOfPurchaseBlock{
+    @include flex-center-row;
+    gap: 10px;
+
+    .termsOfPurchaseBlockIcon{
+        width: 56px;
+        height: 56px;
+        border-radius: 10px;
+        background-color: $color-gray-background;
+        @include flex-center-row;
+
+        img{
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .termsOfPurchaseBlockDesc{
+        @include flex-center-column;
+        align-items: start;
+
+        .termsOfPurchaseBlockTitle{
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.4;
+        }
+
+        .termsOfPurchaseBlockSubtitle{
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}

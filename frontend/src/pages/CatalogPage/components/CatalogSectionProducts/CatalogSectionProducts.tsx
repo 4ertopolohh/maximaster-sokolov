@@ -81,6 +81,8 @@ const CatalogSectionProducts = ({ items }: CatalogSectionProductsProps) => {
                         productIcon={item.productIcon}
                         title={item.title}
                         price={item.price}
+                        productId={item.productId}
+                        preferredColor={item.preferredColor}
                     />
                 ))}
             </div>

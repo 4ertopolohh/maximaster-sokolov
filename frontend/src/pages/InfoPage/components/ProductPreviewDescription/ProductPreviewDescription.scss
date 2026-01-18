@@ -1,0 +1,49 @@
+@use '../../../../styles/variables' as *;
+
+.productPreviewDescription{
+    @include flex-center-column;
+    align-items: start;
+    justify-content: start;
+    gap: 20px;
+    max-width: 536px;
+    width: 100%;
+
+    .productPreviewDescriptionTitle{
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .productPreviewDescriptionPrice{
+        font-size: 32px;
+        font-weight: 500;
+        @include flex-center-row;
+
+        span{
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.4;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+    }
+
+    .selectMemoryType{
+        @include flex-between-row;
+        width: 100%;
+    }
+
+    .productPreviewCharacteristicBlocks{
+        @include flex-between-row;
+        flex-wrap: wrap;
+    }
+
+    .productPreviewDescriptionAddButtons{
+        @include flex-between-row;
+        width: 100%;
+    }
+
+    .termsOfPurchaseBlocks{
+        @include flex-between-row;
+        width: 100%;
+    }
+}   

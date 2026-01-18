@@ -1,0 +1,21 @@
+@use '../../../../styles/variables' as *;
+
+.selectColorButton{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: $transition-style, box-shadow $transition-style;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.selectColorButton:not(.selectColorButton--active):hover{
+    transform: scale(1.1);
+}
+
+.selectColorButton.selectColorButton--active{
+    box-shadow: 0 0 0 3px $color-black;
+}
+
+.selectColorButton.selectColorButton--active:hover{
+    transform: none;
+}
