@@ -35,6 +35,7 @@
     .productPreviewCharacteristicBlocks{
         @include flex-between-row;
         flex-wrap: wrap;
+        width: 100%;
     }
 
     .productPreviewDescriptionAddButtons{

@@ -1,6 +1,7 @@
 @use '../../../../styles/variables' as *;
 
 .productPreviewSection{
+    padding-bottom: 50px;
     .container{
         @include flex-between-row;
     }

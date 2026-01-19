@@ -1,0 +1,11 @@
+@use '../../../../styles/variables' as *;
+
+.productDescriptionCharacteristicsList{
+    width: 100% !important;
+    @include flex-center-column;
+    gap: 30px;
+
+    .productDescriptionCharacteristicsListItem{
+        width: 100%;
+    }
+}

@@ -1,0 +1,18 @@
+@use '../../../../styles/variables' as *;
+
+.descriptionSectionDetails{
+    @include flex-center-column;
+    align-items: start;
+    gap: 20px;
+
+    .descriptionSectionDetailsTitle{
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .descriptionSectionDetailsDesc{
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.4;
+    }
+}

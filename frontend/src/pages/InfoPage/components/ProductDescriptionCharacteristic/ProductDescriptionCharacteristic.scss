@@ -1,0 +1,50 @@
+@use '../../../../styles/variables' as *;
+
+.productDescriptionCharacteristic{
+    width: 100%;
+    @include flex-center-column;
+    align-items: start;
+    gap: 10px;
+
+    .productDescriptionCharacteristicTitle{
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .productDescriptionCharacteristicList{
+        width: 100%;
+        @include flex-center-column;
+        gap: 10px;
+
+        .productDescriptionCharacteristicListItem{
+            min-height: 32px;
+            width: 100%;
+            border-bottom: 1px solid $color-gray-background;
+            @include flex-between-row;
+            align-items: start;
+            padding: 5px 0;
+
+            .productDescriptionCharacteristicListItemTitle{
+                font-size: 16px;
+                font-weight: 400;
+            }
+
+            .productDescriptionCharacteristicListItemValue{
+                font-size: 15px;
+                font-weight: 400;
+            }
+
+            ul{
+                @include flex-center-column;
+                align-items: end;
+                gap: 5px;
+            }
+
+            .productDescriptionCharacteristicListItemValueItem{
+                font-size: 15px;
+                font-weight: 400;
+                font-family: $font-default;
+            }
+        }
+    }
+}

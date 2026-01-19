@@ -1,0 +1,32 @@
+@use '../../../../styles/variables' as *;
+
+.productDescriptionSection {
+  padding: 100px 0;
+  background-color: $color-gray-background-FA;
+
+  @include flex-center-row;
+
+  .container {
+    border-radius: 10px;
+    background-color: $color-white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 50px 50px !important;
+    gap: 30px;
+  }
+
+  .productDescriptionSection__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .productDescriptionSection__content.isCollapsible {
+    overflow: hidden;
+    transition: max-height 400ms ease;
+    will-change: max-height;
+  }
+}

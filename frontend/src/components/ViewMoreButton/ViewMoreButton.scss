@@ -1,0 +1,27 @@
+@use '../../styles/variables' as *;
+
+.viewMoreButton {
+  width: 216px;
+  height: 48px;
+  border: 1px solid $color-black;
+  @include flex-center-row;
+  border-radius: 10px;
+  gap: 5px;
+  transition: $transition-style;
+  background-color: transparent;
+  cursor: pointer;
+
+  h5 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}

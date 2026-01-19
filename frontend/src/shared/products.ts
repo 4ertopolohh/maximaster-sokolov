@@ -51,6 +51,24 @@ export type ProductColorVariant = {
   images: string[]
 }
 
+export type ProductDescriptionCharacteristicValue = string | string[]
+
+export type ProductDescriptionCharacteristicItem = {
+  title: string
+  value: ProductDescriptionCharacteristicValue
+}
+
+export type ProductDescriptionCharacteristicData = {
+  title: string
+  items: ProductDescriptionCharacteristicItem[]
+}
+
+export type ProductDescriptionSectionData = {
+  detailsTitle: string
+  detailsDesc: string
+  characteristics: ProductDescriptionCharacteristicData[]
+}
+
 export type ProductDetails = {
   id: ProductId
   title: string
@@ -64,6 +82,7 @@ export type ProductDetails = {
   characteristics: ProductCharacteristic[]
   descriptionText: string
   terms: ProductTerm[]
+  descriptionSection: ProductDescriptionSectionData
 }
 
 export const PRODUCTS: Record<ProductId, ProductDetails> = {
@@ -105,6 +124,76 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        "Just as a book is judged by its cover, the first thing you notice when you pick up a modern smartphone is the display. Nothing surprising, because advanced technologies allow you to practically level the display frames and cutouts for the front camera and speaker, leaving no room for bold design solutions. And how good that in such realities Apple everything is fine with displays. Both critics and mass consumers always praise the quality of the picture provided by the products of the Californian brand. And last year's 6.7-inch Retina panels, which had ProMotion, caused real admiration for many.",
+      characteristics: [
+        {
+          title: 'Screen',
+          items: [
+            { title: 'Screen diagonal', value: '6.7"' },
+            { title: 'The screen resolution', value: '2796x1290' },
+            { title: 'The screen refresh rate', value: '120 Hz' },
+            { title: 'The pixel density', value: '460 ppi' },
+            { title: 'Screen type', value: 'OLED' },
+            {
+              title: 'Additionally',
+              value: ['Dynamic Island', 'Always-On display', 'HDR display', 'True Tone', 'Wide color (P3)'],
+            },
+          ],
+        },
+        {
+          title: 'CPU',
+          items: [
+            { title: 'Chip', value: 'A16 Bionic' },
+            { title: 'CPU cores', value: '6' },
+            { title: 'GPU cores', value: '5' },
+            { title: 'Neural Engine', value: '16-core' },
+            { title: 'Process technology', value: '4 nm' },
+            { title: 'RAM', value: '6 GB' },
+          ],
+        },
+        {
+          title: 'Camera',
+          items: [
+            { title: 'Main camera', value: '48 MP, f/1.78' },
+            { title: 'Ultra Wide', value: '12 MP, f/2.2' },
+            { title: 'Telephoto', value: '12 MP, 3x optical zoom, f/2.8' },
+            { title: 'Front camera', value: '12 MP TrueDepth, f/1.9' },
+            { title: 'Optical zoom range', value: '6x (2x out, 3x in)' },
+            { title: 'Digital zoom', value: 'Up to 15x' },
+            {
+              title: 'Additionally',
+              value: [
+                'Sensor-shift OIS',
+                'Night mode',
+                'Deep Fusion',
+                'Smart HDR',
+                'Photonic Engine',
+                'Apple ProRAW',
+                'ProRes video',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Battery',
+          items: [
+            { title: 'Battery type', value: 'Li-Ion' },
+            { title: 'Capacity', value: '4323 mAh' },
+            { title: 'Video playback', value: 'Up to 29 hours' },
+            { title: 'Audio playback', value: 'Up to 95 hours' },
+            { title: 'Fast charging', value: 'Up to 50% in around 30 minutes (with 20W adapter or higher)' },
+            { title: 'Wireless charging', value: 'MagSafe up to 15W, Qi up to 7.5W' },
+            {
+              title: 'Additionally',
+              value: ['MagSafe support', 'USB Power Delivery', 'Charging via Lightning'],
+            },
+          ],
+        },
+      ],
+    },
   },
 
   camera6k: {
@@ -131,6 +220,28 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'Pocket Cinema Camera 6K is built for creators who want real cinema workflows: a large Super 35 sensor, 6K recording, and flexible codecs that keep detail for post-production.',
+      characteristics: [
+        {
+          title: 'Imaging',
+          items: [
+            { title: 'Sensor', value: 'Super 35' },
+            { title: 'Max resolution', value: '6K (6144×3456)' },
+            { title: 'ISO', value: 'Dual Native ISO up to 25,600' },
+          ],
+        },
+        {
+          title: 'Recording',
+          items: [
+            { title: 'Codecs', value: ['Blackmagic RAW', 'Apple ProRes'] },
+            { title: 'Lens mount', value: 'Canon EF' },
+          ],
+        },
+      ],
+    },
   },
 
   watch9: {
@@ -157,6 +268,27 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'Apple Watch Series 9 focuses on everyday speed and convenience: a bright Always-On display, smooth performance, and health tracking that stays with you all day.',
+      characteristics: [
+        {
+          title: 'Display & Chip',
+          items: [
+            { title: 'Display', value: 'Always-On Retina' },
+            { title: 'Chip', value: 'Apple S9 SiP' },
+          ],
+        },
+        {
+          title: 'Health',
+          items: [
+            { title: 'Key sensors', value: ['Heart rate', 'Blood oxygen', 'ECG'] },
+            { title: 'Battery', value: 'Up to 18 hours' },
+          ],
+        },
+      ],
+    },
   },
 
   airpodsmax: {
@@ -180,6 +312,27 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'AirPods Max are made for immersive listening: strong Active Noise Cancellation, Transparency mode, and spacious sound for music and movies.',
+      characteristics: [
+        {
+          title: 'Sound',
+          items: [
+            { title: 'Noise control', value: ['Active Noise Cancellation', 'Transparency'] },
+            { title: 'Spatial Audio', value: 'With dynamic head tracking' },
+          ],
+        },
+        {
+          title: 'Battery',
+          items: [
+            { title: 'Listening time', value: 'Up to 20 hours' },
+            { title: 'Charging', value: 'Lightning' },
+          ],
+        },
+      ],
+    },
   },
 
   galaxywatch6: {
@@ -206,6 +359,28 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'Galaxy Watch6 Classic combines a premium rotating-bezel style with modern health tracking and a bright Always-On AMOLED display.',
+      characteristics: [
+        {
+          title: 'Basics',
+          items: [
+            { title: 'Size', value: '47 mm' },
+            { title: 'Display', value: 'AMOLED, Always-On' },
+            { title: 'Chip', value: 'Exynos W930' },
+          ],
+        },
+        {
+          title: 'Health',
+          items: [
+            { title: 'Sensors', value: ['HR', 'ECG', 'BIA', 'SpO₂'] },
+            { title: 'Battery', value: '425 mAh' },
+          ],
+        },
+      ],
+    },
   },
 
   fold5: {
@@ -232,6 +407,27 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'Galaxy Z Fold5 is a foldable phone designed for multitasking: a compact cover screen outside and a larger inner display when unfolded.',
+      characteristics: [
+        {
+          title: 'Screens',
+          items: [
+            { title: 'Form factor', value: 'Foldable' },
+            { title: 'Usage', value: ['Cover screen', 'Large inner screen'] },
+          ],
+        },
+        {
+          title: 'Everyday',
+          items: [
+            { title: 'Focus', value: 'Multitasking' },
+            { title: 'Design', value: 'Phantom Black' },
+          ],
+        },
+      ],
+    },
   },
 
   galaxybudsfe: {
@@ -255,6 +451,27 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'Galaxy Buds FE are tuned for daily comfort: Active Noise Cancellation when you need focus, and a long-lasting case for commuting and work.',
+      characteristics: [
+        {
+          title: 'Audio',
+          items: [
+            { title: 'Modes', value: ['ANC', 'Ambient'] },
+            { title: 'Sound', value: 'Deep bass, clear vocals' },
+          ],
+        },
+        {
+          title: 'Battery',
+          items: [
+            { title: 'Total time', value: 'Up to 30 hours (with case)' },
+            { title: 'Color', value: 'Graphite' },
+          ],
+        },
+      ],
+    },
   },
 
   ipad9: {
@@ -281,6 +498,27 @@ export const PRODUCTS: Record<ProductId, ProductDetails> = {
       { icon: inStockIcon, title: 'In Stock', subtitle: 'Today' },
       { icon: guaranteedIcon, title: 'Guaranteed', subtitle: '1 year' },
     ],
+    descriptionSection: {
+      detailsTitle: 'Details',
+      detailsDesc:
+        'iPad (9th gen) is a simple, reliable tablet for study and everyday tasks: a comfortable 10.2-inch display, solid performance, and classic iPad experience.',
+      characteristics: [
+        {
+          title: 'Display & Use',
+          items: [
+            { title: 'Screen', value: '10.2"' },
+            { title: 'Best for', value: ['Learning', 'Browsing', 'Entertainment'] },
+          ],
+        },
+        {
+          title: 'Basics',
+          items: [
+            { title: 'Connectivity', value: 'Wi-Fi' },
+            { title: 'Color', value: 'Silver' },
+          ],
+        },
+      ],
+    },
   },
 }
 
