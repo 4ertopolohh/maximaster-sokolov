@@ -1,0 +1,20 @@
+@use '../../../../styles/variables' as *;
+
+.randomColorInputField{
+    @include flex-center-column;
+    gap: 5px;
+
+    h5{
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    input{
+        min-width: 256px;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background-color: $color-gray-background;
+        padding: 0 15px;
+    }
+}

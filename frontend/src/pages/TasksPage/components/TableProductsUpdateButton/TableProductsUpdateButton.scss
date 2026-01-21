@@ -1,0 +1,17 @@
+@use '../../../../styles/variables' as *;
+
+.tableProductsUpdateButton{
+    height: 40px;
+    width: 200px;
+    background-color: $color-black;
+    border-radius: 10px;
+    @include flex-center-row;
+    color: $color-white;
+    transition: $transition-style;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover{
+        transform: scale(1.03);
+    }
+}

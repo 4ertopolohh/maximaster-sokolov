@@ -1,0 +1,9 @@
+@use '../../../../styles/variables' as *;
+
+.randomColor{
+    .container{
+        width: 100%;
+        flex-direction: column;
+        gap: 50px;
+    }
+}

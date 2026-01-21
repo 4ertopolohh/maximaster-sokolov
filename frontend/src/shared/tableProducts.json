@@ -1,0 +1,12 @@
+[
+  { "price": 9685, "quantity": 3, "name": "Бумага для принтера" },
+  { "price": 13896, "quantity": 5, "name": "Шкаф книжный" },
+  { "price": 14739, "quantity": 5, "name": "Канцелярский набор" },
+  { "price": 2500, "quantity": 12, "name": "Скотч упаковочный" },
+  { "price": 199, "quantity": 50, "name": "Карандаш простой" },
+  { "price": 599, "quantity": 18, "name": "Ручка гелевая" },
+  { "price": 1299, "quantity": 7, "name": "Папка-регистратор" },
+  { "price": 8990, "quantity": 2, "name": "Офисное кресло" },
+  { "price": 4990, "quantity": 4, "name": "Настольная лампа" },
+  { "price": 0, "quantity": 1, "name": "Промо-товар" }
+]

@@ -1,0 +1,16 @@
+@use '../../../../styles/variables' as *;
+
+.tableProductsFilterInput{
+    width: 200px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: $color-gray-background;
+}
+
+.tableProductsFilterInputError{
+    border-color: red;
+}

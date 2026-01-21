@@ -1,0 +1,29 @@
+@use '../../../../styles/variables' as *;
+
+.placingAnOrder {
+    .container {
+        width: 100%;
+        flex-direction: column;
+        gap: 50px;
+        margin-top: 100px;
+
+        .taskWrapper {
+            gap: 10px !important;
+
+            .placingAnOrderInputField {
+                min-width: 400px;
+                height: 40px;
+                border: 1px solid transparent;
+                padding: 0 15px;
+                border-radius: 10px;
+                background-color: $color-gray-background;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .placingAnOrderInputFieldError {
+                border-color: red;
+            }
+        }
+    }
+}

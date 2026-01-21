@@ -1,0 +1,14 @@
+@use '../../../../styles/variables' as *;
+
+.placingAnOrderYandexMap {
+    width: 400px;
+    height: 200px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: $color-gray-background;
+}
+
+.placingAnOrderYandexMapError {
+    border-color: red;
+}

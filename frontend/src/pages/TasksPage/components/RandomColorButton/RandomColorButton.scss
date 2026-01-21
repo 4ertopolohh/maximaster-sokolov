@@ -1,0 +1,17 @@
+@use '../../../../styles/variables' as *;
+
+.randomColorButton{
+    width: 260px;
+    height: 56px;
+    border-radius: 10px;
+    color: $color-white;
+    background-color: $color-black;
+    transition: $transition-style;
+    @include flex-center-row;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover{
+        transform: scale(0.95);
+    }
+}

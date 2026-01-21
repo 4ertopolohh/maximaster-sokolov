@@ -1,0 +1,6 @@
+@use '../../styles/variables' as *;
+
+.taskWrapper{
+    @include flex-center-column;
+    gap: 20px;
+}

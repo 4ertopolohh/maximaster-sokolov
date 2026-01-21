@@ -49,7 +49,7 @@ const headerNavLinks: HeaderNavLinkItem[] = [
   { label: 'About', to: ROUTES.about },
   { label: 'Contact Us', to: ROUTES.contact },
   { label: 'Blog', to: ROUTES.blog },
-  { label: 'Tasks', to: ROUTES.tasks },
+  { label: 'Задания', to: ROUTES.tasks },
 ]
 
 const headerNavActions: HeaderNavActionItem[] = [

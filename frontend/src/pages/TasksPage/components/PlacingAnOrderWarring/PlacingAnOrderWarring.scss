@@ -1,0 +1,18 @@
+@use '../../../../styles/variables' as *;
+
+.placingAnOrderWarring {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-white;
+    line-height: 25px;
+    padding: 0 10px;
+    border-radius: 8px;
+}
+
+.placingAnOrderWarringError {
+    background-color: rgb(202, 1, 1);
+}
+
+.placingAnOrderWarringSuccess {
+    background-color: green;
+}

@@ -1,0 +1,6 @@
+@use '../../../../styles/variables' as *;
+
+.randomColorRectangle{
+    border-radius: 10px;
+    transition: width 250ms ease, height 250ms ease, background-color 300ms ease;
+}

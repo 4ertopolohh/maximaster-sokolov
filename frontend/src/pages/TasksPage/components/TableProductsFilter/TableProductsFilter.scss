@@ -1,0 +1,18 @@
+@use '../../../../styles/variables' as *;
+
+.tableProductsFilter{
+    @include flex-center-row;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    span{
+        font-family: $font-default;
+    }
+}
+
+.tableProductsFilterWarning{
+    width: 100%;
+    font-family: $font-default;
+    font-size: 12px;
+    color: red;
+}

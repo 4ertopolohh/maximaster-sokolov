@@ -1,0 +1,31 @@
+@use '../../../../styles/variables' as *;
+
+.tableProductsTable {
+    font-family: $font-default;
+    border: 1px solid $color-black;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    .tableHead {
+        th {
+            height: 75px;
+            width: 250px;
+            text-align: center;
+            border: 1px solid $color-black;
+            border-top: none;
+            background-color: $color-black;
+            color: $color-white;
+        }
+    }
+
+    .tableBody {
+        td {
+            height: 75px;
+            width: 250px;
+            text-align: center;
+            border: 1px solid $color-black;
+        }
+    }
+}
