@@ -1,0 +1,42 @@
+@use '../../../../styles/variables' as *;
+
+.exelTable{
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: $color-white;
+    max-width: 100%;
+}
+
+.exelCell{
+    padding: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-width: 0;
+
+    &:last-child{
+        border-right: none;
+    }
+}
+
+.exelTable{
+    tr:last-child{
+        .exelCell{
+            border-bottom: none;
+        }
+    }
+}
+
+.exelCellInput{
+    width: var(--exel-cell-width, 150px);
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    font-family: $font-default;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    min-width: 0;
+}

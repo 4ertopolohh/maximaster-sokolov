@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import InDevSection from '../../components/InDevSection/InDevSection'
+// import InDevSection from '../../components/InDevSection/InDevSection'
 import Story from '../../components/Story/Story'
 import '../InfoPage/InfoPage.scss'
 import ProductPreviewSection from './components/ProductPreviewSection/ProductPreviewSection'
@@ -28,6 +28,8 @@ type ProductSelection = {
   preferredColor?: string
 }
 
+const INFO_PAGE_SELECTION_STORAGE_KEY = 'infoPage:lastSelection'
+
 const isRecord = (value: unknown): value is Record<string, unknown> => {
   return Boolean(value) && typeof value === 'object'
 }
@@ -42,6 +44,33 @@ const isProductId = (value: string): value is ProductId => {
 
 const isCatalogCardId = (value: string): value is CatalogCardId => {
   return value in CATALOG_CARDS
+}
+
+const readSelectionFromSessionStorage = (): ProductSelection | null => {
+  try {
+    const raw = sessionStorage.getItem(INFO_PAGE_SELECTION_STORAGE_KEY)
+    if (!raw) return null
+
+    const parsed: unknown = JSON.parse(raw)
+    if (!isRecord(parsed)) return null
+
+    const productIdRaw = readString(parsed.productId)
+    if (!productIdRaw || !isProductId(productIdRaw)) return null
+
+    const preferredColor = readString(parsed.preferredColor)
+
+    return { productId: productIdRaw, preferredColor: preferredColor ?? undefined }
+  } catch {
+    return null
+  }
+}
+
+const writeSelectionToSessionStorage = (selection: ProductSelection) => {
+  try {
+    sessionStorage.setItem(INFO_PAGE_SELECTION_STORAGE_KEY, JSON.stringify(selection))
+  } catch {
+    return
+  }
 }
 
 const resolveProductSelectionFromLocationState = (state: unknown): ProductSelection | null => {
@@ -80,6 +109,12 @@ const resolveProductSelectionFromLocationState = (state: unknown): ProductSelect
   return null
 }
 
+const resolveProductSelection = (state: unknown): ProductSelection | null => {
+  const fromState = resolveProductSelectionFromLocationState(state)
+  if (fromState) return fromState
+  return readSelectionFromSessionStorage()
+}
+
 const resolveInitialColor = (product: ProductDetails, preferredColor?: string): string => {
   if (preferredColor) {
     if (product.colorVariants && preferredColor in product.colorVariants) return preferredColor
@@ -90,115 +125,54 @@ const resolveInitialColor = (product: ProductDetails, preferredColor?: string): 
 
 const InfoPage = () => {
   const location = useLocation()
-  const selection = resolveProductSelectionFromLocationState(location.state)
 
-  if (!selection) {
-    return <Navigate to={ROUTES.home} replace />
-  }
+  const selection = useMemo(() => resolveProductSelection(location.state), [location.state])
+  const product: ProductDetails | null = selection ? PRODUCTS[selection.productId] : null
 
-  const product: ProductDetails = PRODUCTS[selection.productId]
+  useEffect(() => {
+    if (!selection) return
+    writeSelectionToSessionStorage(selection)
+  }, [selection?.productId, selection?.preferredColor])
 
-  /*
-  const productDescriptionDetailsTitle = 'Details'
-  const productDescriptionDetailsDesc =
-    "Just as a book is judged by its cover, the first thing you notice when you pick up a modern smartphone is the display. Nothing surprising, because advanced technologies allow you to practically level the display frames and cutouts for the front camera and speaker, leaving no room for bold design solutions. And how good that in such realities Apple everything is fine with displays. Both critics and mass consumers always praise the quality of the picture provided by the products of the Californian brand. And last year's 6.7-inch Retina panels, which had ProMotion, caused real admiration for many."
+  const productDescriptionDetailsTitle = product ? product.descriptionSection.detailsTitle : ''
+  const productDescriptionDetailsDesc = product ? product.descriptionSection.detailsDesc : ''
+  const productDescriptionCharacteristics: ProductDescriptionCharacteristicData[] = product
+    ? product.descriptionSection.characteristics
+    : []
 
-  const productDescriptionCharacteristics: ProductDescriptionCharacteristicData[] = [
-    {
-      title: 'Screen',
-      items: [
-        { title: 'Screen diagonal', value: '6.7"' },
-        { title: 'The screen resolution', value: '2796x1290' },
-        { title: 'The screen refresh rate', value: '120 Hz' },
-        { title: 'The pixel density', value: '460 ppi' },
-        { title: 'Screen type', value: 'OLED' },
-        {
-          title: 'Additionally',
-          value: ['Dynamic Island', 'Always-On display', 'HDR display', 'True Tone', 'Wide color (P3)'],
-        },
-      ],
-    },
-    {
-      title: 'CPU',
-      items: [
-        { title: 'Chip', value: 'A16 Bionic' },
-        { title: 'CPU cores', value: '6' },
-        { title: 'GPU cores', value: '5' },
-        { title: 'Neural Engine', value: '16-core' },
-        { title: 'Process technology', value: '4 nm' },
-        { title: 'RAM', value: '6 GB' },
-      ],
-    },
-    {
-      title: 'Camera',
-      items: [
-        { title: 'Main camera', value: '48 MP, f/1.78' },
-        { title: 'Ultra Wide', value: '12 MP, f/2.2' },
-        { title: 'Telephoto', value: '12 MP, 3x optical zoom, f/2.8' },
-        { title: 'Front camera', value: '12 MP TrueDepth, f/1.9' },
-        { title: 'Optical zoom range', value: '6x (2x out, 3x in)' },
-        { title: 'Digital zoom', value: 'Up to 15x' },
-        {
-          title: 'Additionally',
-          value: [
-            'Sensor-shift OIS',
-            'Night mode',
-            'Deep Fusion',
-            'Smart HDR',
-            'Photonic Engine',
-            'Apple ProRAW',
-            'ProRes video',
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Battery',
-      items: [
-        { title: 'Battery type', value: 'Li-Ion' },
-        { title: 'Capacity', value: '4323 mAh' },
-        { title: 'Video playback', value: 'Up to 29 hours' },
-        { title: 'Audio playback', value: 'Up to 95 hours' },
-        { title: 'Fast charging', value: 'Up to 50% in around 30 minutes (with 20W adapter or higher)' },
-        { title: 'Wireless charging', value: 'MagSafe up to 15W, Qi up to 7.5W' },
-        {
-          title: 'Additionally',
-          value: ['MagSafe support', 'USB Power Delivery', 'Charging via Lightning'],
-        },
-      ],
-    },
-  ]
-  */
-
-  const productDescriptionDetailsTitle = product.descriptionSection.detailsTitle
-  const productDescriptionDetailsDesc = product.descriptionSection.detailsDesc
-  const productDescriptionCharacteristics: ProductDescriptionCharacteristicData[] =
-    product.descriptionSection.characteristics
-
-  const [selectedColor, setSelectedColor] = useState<string>(() =>
-    resolveInitialColor(product, selection.preferredColor),
-  )
+  const [selectedColor, setSelectedColor] = useState<string>(() => {
+    if (!product) return ''
+    return resolveInitialColor(product, selection?.preferredColor)
+  })
 
   const resolved = useMemo(() => {
+    if (!product) return { title: '', images: [] as string[] }
     const variant = product.colorVariants ? product.colorVariants[selectedColor] : undefined
     if (variant) {
       return { title: variant.title, images: variant.images }
     }
     return { title: product.title, images: product.images }
-  }, [product.colorVariants, product.images, product.title, selectedColor])
+  }, [product, selectedColor])
 
-  const [images, setImages] = useState<string[]>(resolved.images)
-  const [selectedImage, setSelectedImage] = useState<string>(resolved.images[0] ?? '')
+  const [images, setImages] = useState<string[]>(() => resolved.images)
+  const [selectedImage, setSelectedImage] = useState<string>(() => resolved.images[0] ?? '')
 
   useEffect(() => {
-    const nextColor = resolveInitialColor(product, selection.preferredColor)
+    if (!product) return
+    const nextColor = resolveInitialColor(product, selection?.preferredColor)
     setSelectedColor(nextColor)
-  }, [product.id, selection.preferredColor])
+  }, [product?.id, selection?.preferredColor])
 
   useEffect(() => {
     setImages(resolved.images)
     setSelectedImage(resolved.images[0] ?? '')
   }, [resolved.images])
+
+  useEffect(() => {
+    if (!product) return
+    if (!selectedColor) return
+    writeSelectionToSessionStorage({ productId: product.id, preferredColor: selectedColor })
+  }, [product?.id, selectedColor])
 
   const handleSelectColor = (color: string) => {
     setSelectedColor(color)
@@ -228,6 +202,10 @@ const InfoPage = () => {
     setSelectedImage(nextImage)
   }
 
+  if (!selection || !product) {
+    return <Navigate to={ROUTES.home} replace />
+  }
+
   return (
     <main className="page">
       <Story />
@@ -253,7 +231,7 @@ const InfoPage = () => {
         detailsDesc={productDescriptionDetailsDesc}
         characteristics={productDescriptionCharacteristics}
       />
-      <InDevSection sectionName="Info" />
+      {/* <InDevSection sectionName="Info" /> */}
     </main>
   )
 }

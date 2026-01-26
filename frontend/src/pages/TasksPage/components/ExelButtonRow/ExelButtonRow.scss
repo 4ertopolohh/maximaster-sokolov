@@ -1,0 +1,17 @@
+@use '../../../../styles/variables' as *;
+
+.exelButtonRow{
+    width: 40px;
+    height: 40px;
+    background-color: $color-black;
+    border-radius: 10px;
+    @include flex-center-row;
+    color: $color-white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: $transition-style;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+}

@@ -1,0 +1,32 @@
+@use '../../../../styles/variables' as *;
+
+.exel{
+    padding-bottom: 50px;
+
+    .container{
+        margin-top: 100px;
+        flex-direction: column;
+        gap: 50px;
+    }
+}
+
+.tableWrapper{
+    @include flex-center-row;
+    gap: 20px;
+    width: 100%;
+    justify-content: start;
+    align-items: start;
+
+    .addColumnButtons{
+        @include flex-center-column;
+        gap: 20px;
+        flex: 0 0 auto;
+    }
+}
+
+.addRowButtons{
+    @include flex-center-row;
+    justify-content: start;
+    gap: 20px;
+    width: 100%;
+}

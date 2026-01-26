@@ -1,0 +1,22 @@
+@use '../../../../styles/variables' as *;
+
+.processorGraphInfoBlock{
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: $color-black;
+    @include flex-center-row;
+    gap: 6px;
+
+    .processorGraphInfoBlockTitle{
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-white;
+    }
+
+    .processorGraphInfoBlockValue{
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-white;
+    }
+}
