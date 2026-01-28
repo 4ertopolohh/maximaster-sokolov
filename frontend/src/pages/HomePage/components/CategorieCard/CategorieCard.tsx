@@ -4,16 +4,17 @@ import '../CategorieCard/CategorieCard.scss';
 import { ROUTES } from '../../../../shared/routes';
 
 export type CategorieCardProps = {
+    id: string;
     icon: string;
     title: string;
 };
 
-const CategorieCard = ({ icon, title }: CategorieCardProps) => {
+const CategorieCard = ({ id, icon, title }: CategorieCardProps) => {
     return (
         <Link
             className="categorieCard"
             to={ROUTES.catalog}
-            state={{ category: title }}
+            state={{ categoryId: id, categoryTitle: title }}
         >
             <img src={icon} alt="" loading="lazy" />
             <h3>{title}</h3>

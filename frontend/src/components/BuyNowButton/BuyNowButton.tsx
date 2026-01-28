@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../BuyNowButton/BuyNowButton.scss'
 import { ROUTES } from '../../shared/routes'
-import type { ProductId } from '../../shared/products'
 
 export type BuyNowButtonProps = {
   id: string
@@ -9,13 +8,13 @@ export type BuyNowButtonProps = {
   productIcon: string
   price: string
   preferredColor?: string
-  productId?: ProductId
+  productId?: string
   catalogCardId?: string
 }
 
 type BuyNowLocationState = {
   id: string
-  productId?: ProductId
+  productId?: string
   catalogCardId?: string
   preferredColor?: string
 }

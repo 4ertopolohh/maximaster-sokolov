@@ -1,7 +1,8 @@
 @use '../../../../styles/variables' as *;
 
-.miniCatalogContent{
+.miniCatalogContent {
     @include flex-between-row;
     flex-wrap: wrap;
     margin-top: 10px;
+    width: 100%;
 }

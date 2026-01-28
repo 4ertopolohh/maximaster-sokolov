@@ -1,3 +1,4 @@
+#config\settings.py
 """
 Django settings for config project.
 
@@ -25,9 +26,6 @@ SECRET_KEY = 'django-insecure-w+s%jogsabukj*cr*osx#c$q^b7190o-etb7x(_c%*o$q()m=)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'counter',
+    'rest_framework',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +116,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+}
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]

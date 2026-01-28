@@ -1,17 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-// import InDevSection from '../../components/InDevSection/InDevSection'
 import Story from '../../components/Story/Story'
 import '../InfoPage/InfoPage.scss'
 import ProductPreviewSection from './components/ProductPreviewSection/ProductPreviewSection'
 import { ROUTES } from '../../shared/routes'
-import {
-  CATALOG_CARDS,
-  PRODUCTS,
-  type CatalogCardId,
-  type ProductDetails,
-  type ProductId,
-} from '../../shared/products'
+import { getProduct, type ProductDetail } from '../../shared/api/productsApi'
 import ProductDescriptionSection, {
   type ProductDescriptionCharacteristicData,
 } from './components/ProductDescriptionSection/ProductDescriptionSection'
@@ -24,7 +17,7 @@ type ProductRouteState = {
 }
 
 type ProductSelection = {
-  productId: ProductId
+  id: string
   preferredColor?: string
 }
 
@@ -38,28 +31,16 @@ const readString = (value: unknown): string | undefined => {
   return typeof value === 'string' ? value : undefined
 }
 
-const isProductId = (value: string): value is ProductId => {
-  return value in PRODUCTS
-}
-
-const isCatalogCardId = (value: string): value is CatalogCardId => {
-  return value in CATALOG_CARDS
-}
-
 const readSelectionFromSessionStorage = (): ProductSelection | null => {
   try {
     const raw = sessionStorage.getItem(INFO_PAGE_SELECTION_STORAGE_KEY)
     if (!raw) return null
-
     const parsed: unknown = JSON.parse(raw)
     if (!isRecord(parsed)) return null
-
-    const productIdRaw = readString(parsed.productId)
-    if (!productIdRaw || !isProductId(productIdRaw)) return null
-
+    const idRaw = readString(parsed.id)
+    if (!idRaw) return null
     const preferredColor = readString(parsed.preferredColor)
-
-    return { productId: productIdRaw, preferredColor: preferredColor ?? undefined }
+    return { id: idRaw, preferredColor: preferredColor ?? undefined }
   } catch {
     return null
   }
@@ -75,38 +56,16 @@ const writeSelectionToSessionStorage = (selection: ProductSelection) => {
 
 const resolveProductSelectionFromLocationState = (state: unknown): ProductSelection | null => {
   if (!isRecord(state)) return null
-
   const s = state as ProductRouteState
-
   const preferredColor = readString(s.preferredColor)
   const catalogCardId = readString(s.catalogCardId)
   const productIdRaw = readString(s.productId)
   const idRaw = readString(s.id)
 
-  const resolveFromCardId = (cardId: string): ProductSelection | null => {
-    if (!isCatalogCardId(cardId)) return null
-    const card = CATALOG_CARDS[cardId]
-    return { productId: card.productId, preferredColor: preferredColor ?? card.preferredColor }
-  }
+  const pick = catalogCardId || productIdRaw || idRaw
+  if (!pick) return null
 
-  if (catalogCardId) {
-    const resolved = resolveFromCardId(catalogCardId)
-    if (resolved) return resolved
-  }
-
-  if (productIdRaw) {
-    if (isProductId(productIdRaw)) return { productId: productIdRaw, preferredColor }
-    const resolved = resolveFromCardId(productIdRaw)
-    if (resolved) return resolved
-  }
-
-  if (idRaw) {
-    if (isProductId(idRaw)) return { productId: idRaw, preferredColor }
-    const resolved = resolveFromCardId(idRaw)
-    if (resolved) return resolved
-  }
-
-  return null
+  return { id: pick, preferredColor: preferredColor ?? undefined }
 }
 
 const resolveProductSelection = (state: unknown): ProductSelection | null => {
@@ -115,7 +74,7 @@ const resolveProductSelection = (state: unknown): ProductSelection | null => {
   return readSelectionFromSessionStorage()
 }
 
-const resolveInitialColor = (product: ProductDetails, preferredColor?: string): string => {
+const resolveInitialColor = (product: ProductDetail, preferredColor?: string): string => {
   if (preferredColor) {
     if (product.colorVariants && preferredColor in product.colorVariants) return preferredColor
     if (product.colorOptions.includes(preferredColor)) return preferredColor
@@ -125,54 +84,64 @@ const resolveInitialColor = (product: ProductDetails, preferredColor?: string): 
 
 const InfoPage = () => {
   const location = useLocation()
-
   const selection = useMemo(() => resolveProductSelection(location.state), [location.state])
-  const product: ProductDetails | null = selection ? PRODUCTS[selection.productId] : null
+
+  const [product, setProduct] = useState<ProductDetail | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     if (!selection) return
     writeSelectionToSessionStorage(selection)
-  }, [selection?.productId, selection?.preferredColor])
+  }, [selection?.id, selection?.preferredColor])
 
-  const productDescriptionDetailsTitle = product ? product.descriptionSection.detailsTitle : ''
-  const productDescriptionDetailsDesc = product ? product.descriptionSection.detailsDesc : ''
-  const productDescriptionCharacteristics: ProductDescriptionCharacteristicData[] = product
-    ? product.descriptionSection.characteristics
-    : []
+  useEffect(() => {
+    if (!selection) return
+    let isMounted = true
+    setIsLoading(true)
+    getProduct(selection.id)
+      .then((data) => {
+        if (!isMounted) return
+        setProduct(data)
+      })
+      .finally(() => {
+        if (!isMounted) return
+        setIsLoading(false)
+      })
+    return () => {
+      isMounted = false
+    }
+  }, [selection?.id])
 
-  const [selectedColor, setSelectedColor] = useState<string>(() => {
-    if (!product) return ''
-    return resolveInitialColor(product, selection?.preferredColor)
-  })
+  const [selectedColor, setSelectedColor] = useState<string>('')
+
+  useEffect(() => {
+    if (!product) return
+    if (product.colorOptions.length === 0) return
+    const next = resolveInitialColor(product, selection?.preferredColor)
+    setSelectedColor(next)
+  }, [product?.id, selection?.preferredColor])
 
   const resolved = useMemo(() => {
     if (!product) return { title: '', images: [] as string[] }
     const variant = product.colorVariants ? product.colorVariants[selectedColor] : undefined
-    if (variant) {
+    if (variant && variant.images.length > 0) {
       return { title: variant.title, images: variant.images }
     }
-    return { title: product.title, images: product.images }
+    return { title: product.title, images: product.images ?? [] }
   }, [product, selectedColor])
 
-  const [images, setImages] = useState<string[]>(() => resolved.images)
-  const [selectedImage, setSelectedImage] = useState<string>(() => resolved.images[0] ?? '')
+  const [images, setImages] = useState<string[]>([])
+  const [selectedImage, setSelectedImage] = useState<string>('')
 
   useEffect(() => {
-    if (!product) return
-    const nextColor = resolveInitialColor(product, selection?.preferredColor)
-    setSelectedColor(nextColor)
-  }, [product?.id, selection?.preferredColor])
-
-  useEffect(() => {
+    if (resolved.images.length === 0) {
+      setImages([])
+      setSelectedImage('')
+      return
+    }
     setImages(resolved.images)
-    setSelectedImage(resolved.images[0] ?? '')
+    setSelectedImage(resolved.images[0])
   }, [resolved.images])
-
-  useEffect(() => {
-    if (!product) return
-    if (!selectedColor) return
-    writeSelectionToSessionStorage({ productId: product.id, preferredColor: selectedColor })
-  }, [product?.id, selectedColor])
 
   const handleSelectColor = (color: string) => {
     setSelectedColor(color)
@@ -184,27 +153,35 @@ const InfoPage = () => {
       if (nextImage === prevSelected) {
         return prevImages
       }
-
       const nextIndex = prevImages.findIndex((img) => img === nextImage)
       const prevIndex = prevImages.findIndex((img) => img === prevSelected)
-
       if (nextIndex === -1 || prevIndex === -1) {
         return prevImages
       }
-
       const updated = [...prevImages]
       updated[prevIndex] = nextImage
       updated[nextIndex] = prevSelected
-
       return updated
     })
-
     setSelectedImage(nextImage)
   }
 
-  if (!selection || !product) {
+  if (!selection) {
     return <Navigate to={ROUTES.home} replace />
   }
+
+  if (isLoading || !product) {
+    return (
+      <main className="page">
+        <Story />
+      </main>
+    )
+  }
+
+  const productDescriptionDetailsTitle = product.descriptionSection.detailsTitle
+  const productDescriptionDetailsDesc = product.descriptionSection.detailsDesc
+  const productDescriptionCharacteristics: ProductDescriptionCharacteristicData[] =
+    product.descriptionSection.characteristics
 
   return (
     <main className="page">
@@ -218,7 +195,7 @@ const InfoPage = () => {
         selectedImage={selectedImage}
         onSelectImage={handleSelectImage}
         memoryOptions={product.memoryOptions}
-        disabledMemoryOptions={product.disabledMemoryOptions}
+        disabledMemoryOptions={product.disabledMemoryOptions ?? undefined}
         selectedColor={selectedColor}
         onSelectColor={handleSelectColor}
         colorOptions={product.colorOptions}
@@ -231,7 +208,6 @@ const InfoPage = () => {
         detailsDesc={productDescriptionDetailsDesc}
         characteristics={productDescriptionCharacteristics}
       />
-      {/* <InDevSection sectionName="Info" /> */}
     </main>
   )
 }

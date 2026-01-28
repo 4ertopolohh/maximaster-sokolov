@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import BuyNowButton from '../BuyNowButton/BuyNowButton'
 import '../CatalogCard/CatalogCard.scss'
-
 import favoriteIconProductCard from '../../assets/images/icons/favoriteIconProductCard.png'
 import favoriteIconProductCardActive from '../../assets/images/icons/favoriteIconProductCardActive.png'
-import { PRODUCTS, type ProductId } from '../../shared/products'
 
 export type CatalogCardProps = {
   id: string
   productIcon: string
   title: string
   price: string
-  productId?: ProductId
+  productId?: string
   preferredColor?: string
 }
 
@@ -38,19 +36,21 @@ const writeFavoriteToStorage = (id: string, value: boolean) => {
   }
 }
 
-const isProductId = (value: string): value is ProductId => {
-  return value in PRODUCTS
-}
+const CatalogCard = ({
+  id,
+  productIcon,
+  title,
+  price,
+  productId,
+  preferredColor,
+}: CatalogCardProps) => {
+  if (!productIcon) {
+    return null
+  }
 
-const getPreferredColorForProduct = (productId: ProductId, title: string): string | undefined => {
-  if (productId !== 'iphone14') return undefined
-  const lower = title.toLowerCase()
-  if (lower.includes('gold')) return '#E1B000'
-  return '#781DBC'
-}
-
-const CatalogCard = ({ id, productIcon, title, price, productId, preferredColor }: CatalogCardProps) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(() => readFavoriteFromStorage(id))
+  const [isFavorite, setIsFavorite] = useState<boolean>(() =>
+    readFavoriteFromStorage(id),
+  )
 
   const toggleFavorite = () => {
     setIsFavorite((prev) => {
@@ -60,8 +60,7 @@ const CatalogCard = ({ id, productIcon, title, price, productId, preferredColor 
     })
   }
 
-  const resolvedProductId: ProductId = productId ? productId : isProductId(id) ? id : 'iphone14'
-  const resolvedPreferredColor = preferredColor ? preferredColor : getPreferredColorForProduct(resolvedProductId, title)
+  const resolvedProductId = productId ? productId : id
 
   return (
     <div className="catalogCard">
@@ -72,20 +71,31 @@ const CatalogCard = ({ id, productIcon, title, price, productId, preferredColor 
         aria-pressed={isFavorite}
       >
         <img
-          src={isFavorite ? favoriteIconProductCardActive : favoriteIconProductCard}
+          src={
+            isFavorite
+              ? favoriteIconProductCardActive
+              : favoriteIconProductCard
+          }
           alt=""
           loading="lazy"
         />
       </button>
-      <img src={productIcon} alt="" loading="lazy" className="productIcon" />
+
+      <img
+        src={productIcon}
+        alt=""
+        loading="lazy"
+        className="productIcon"
+      />
       <h6 className="productTitle">{title}</h6>
       <h4 className="productPrice">${price}</h4>
+
       <BuyNowButton
         id={id}
         title={title}
         productIcon={productIcon}
         price={price}
-        preferredColor={resolvedPreferredColor}
+        preferredColor={preferredColor}
         productId={resolvedProductId}
         catalogCardId={id}
       />

@@ -23,15 +23,20 @@ const ProductPreviewSection = ({
   descriptionText,
   terms,
 }: ProductPreviewSectionProps) => {
+  const hasImages = images.length > 0
+  const hasColors = colorOptions.length > 0
+
   return (
     <section className="productPreviewSection">
       <div className="container">
-        <ProductPreviewImages
-          images={images}
-          selectedImage={selectedImage}
-          productTitle={productTitle}
-          onSelectImage={onSelectImage}
-        />
+        {hasImages && (
+          <ProductPreviewImages
+            images={images}
+            selectedImage={selectedImage}
+            productTitle={productTitle}
+            onSelectImage={onSelectImage}
+          />
+        )}
         <ProductPreviewDescription
           title={title}
           fullPrice={fullPrice}
@@ -40,7 +45,7 @@ const ProductPreviewSection = ({
           disabledMemoryOptions={disabledMemoryOptions}
           selectedColor={selectedColor}
           onSelectColor={onSelectColor}
-          colorOptions={colorOptions}
+          colorOptions={hasColors ? colorOptions : []}
           characteristics={characteristics}
           descriptionText={descriptionText}
           terms={terms}

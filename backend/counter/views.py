@@ -1,3 +1,4 @@
+#counter\views.py
 from django.http import JsonResponse
 
 def visits_api(request):
